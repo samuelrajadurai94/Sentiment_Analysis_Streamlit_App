@@ -1,11 +1,10 @@
 import streamlit as st
 import requests
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import json
 
-API_URL = "https://sentiment-analysis-call-transcripts-9q41xc128.vercel.app/upload"
+API_URL = "https://sentiment-analysis-call-transcripts-9q41xc128.vercel.app/"
 
 st.title("Sentiment Analysis on Sales Call Transcripts")
 st.write("Upload your call transcript files to analyze sentiment.")
@@ -21,7 +20,7 @@ if uploaded_file is not None:
         with st.spinner("Analyzing sentiment..."):
             files = {"file": (uploaded_file.name, uploaded_file.getvalue())}
             response = requests.post(API_URL, files=files)
-            st.write(response)
+            #st.write(response)
             if response.status_code == 200:
                 result = response.json()
                 st.success("Analysis Complete!")
@@ -47,13 +46,13 @@ if uploaded_file is not None:
                 
                 col1, col2 = st.columns(2)
                 
-                #scores = result['scores']
-                df = pd.DataFrame(list(scores.items()), columns=['Sentiment', 'Score'])
-
+                sentiments = list(scores.keys())
+                values = list(scores.values())
+                
                 # Create bar plot
-                fig = px.bar(df, x='Sentiment', y='Score', title="Sentiment Scores", 
+                fig = px.bar(x=sentiments, y=values, title="Sentiment Scores", 
                             labels={'Sentiment': 'Sentiment Type', 'Score': 'Score Value'},
-                            color='Sentiment')
+                            color=sentiments)
                 fig.update_layout(showlegend=False,autosize=False,width=400,height=500,
                                   plot_bgcolor='lightgray',  # Light gray background for plot area
                                   paper_bgcolor='white',     # White background for the canvas

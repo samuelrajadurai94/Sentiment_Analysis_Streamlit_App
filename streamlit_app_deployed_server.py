@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
-import plotly.express as px
-import plotly.graph_objects as go
+#import plotly.express as px
+#import plotly.graph_objects as go
 import json
 
 API_URL = "https://sentiment-analysis-call-transcripts-9q41xc128.vercel.app/"
@@ -24,7 +24,7 @@ if uploaded_file is not None:
             if response.status_code == 200:
                 result = response.json()
                 st.success("Analysis Complete!")
-                #st.json(result)
+                st.json(result)
 
                 st.title("OVERALL SENTIMENT OF GIVEN TRANSCRIPT")  # Title for the text box
 
@@ -37,7 +37,7 @@ if uploaded_file is not None:
                     """,
                     unsafe_allow_html=True
                 )
-
+                '''
                 # Display sentiment score
                 st.subheader("Sentiment Scores Visualization:")
                 scores = result['scores']
@@ -83,6 +83,6 @@ if uploaded_file is not None:
                     margin=dict(l=20,r=50,b=50,pad=4))
 
                 col2.plotly_chart(fig)
-                
+                '''
             else:
                 st.error("Error: Unable to process the file.")

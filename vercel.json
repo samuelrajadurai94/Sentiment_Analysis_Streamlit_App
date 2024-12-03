@@ -4,6 +4,6 @@
         {"src": "streamlit_app_deployed_server.py", "use": "@vercel/python"}
     ],
     "routes": [
-        {"src": "/(.*)", "dest": "streamlit_app_deployed_server.py"}
+        {"src": "/(.*)", "dest": "/streamlit_app_deployed_server.py"}
     ]
 }

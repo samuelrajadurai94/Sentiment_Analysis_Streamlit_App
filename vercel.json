@@ -7,4 +7,4 @@
         {"src": "/(.*)", "dest": "/streamlit_app_deployed_server.py"}
     ]   
 }
-}
+
